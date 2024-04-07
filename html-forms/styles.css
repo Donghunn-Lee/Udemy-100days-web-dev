@@ -4,6 +4,17 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+h1 {
+  text-align: center;
+  color: white;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 form {
   width: 30rem;
   margin: 3rem auto;
@@ -17,7 +28,9 @@ label {
   display: block;
 }
 
-input {
+input,
+textarea,
+select {
   width: 100%;
   display: block;
   margin-bottom: 1rem;
@@ -28,7 +41,12 @@ input {
   color: rgb(58, 58, 58);
 }
 
-input:focus {
+textarea {
+  resize: none;
+}
+
+input:focus,
+textarea:focus {
   background-color: rgb(220, 190, 253);
   color: rgb(108, 0, 250);
   border: rgb(40, 5, 63);
@@ -46,16 +64,15 @@ button {
 }
 
 button:hover {
-    background-color: rgb(52, 14, 95);
-    border-color: rgb(52, 14, 95);
-
+  background-color: rgb(52, 14, 95);
+  border-color: rgb(52, 14, 95);
 }
 
 .form-control-inline {
-    display: flex;
+  display: flex;
 }
 
-.form-control-inline input{
-    width: auto;
-    margin-right: 0.5rem;
+.form-control-inline input {
+  width: auto;
+  margin-right: 0.5rem;
 }
