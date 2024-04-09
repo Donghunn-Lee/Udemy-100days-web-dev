@@ -1,4 +1,26 @@
-// console.log(document.body.children[1].children[0].href)
+let paragraphElement = document.querySelector('p');
 
-document.body.children[1].children[0].href = 'https://www.google.com';
-// console.log(document.body.children[1].children[0].href)
+function changeParagraphText() {
+    paragraphElement.textContent = 'Clicked!';
+    console.log(paragraphElement);
+}
+
+// paragraphElement.addEventListener('click', changeParagraphText);
+
+
+
+// let inputElement = document.querySelector('input');
+
+function retrieveUserInput(event) {
+    let enteredText = event.target.value;
+    // console.log(enteredText);
+    // console.log(event);
+
+    // let enteredText = event.data; => This is different!
+    console.log(enteredText);
+
+}
+
+// inputElement.addEventListener('input', retrieveUserInput)
+
+
