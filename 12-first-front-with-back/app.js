@@ -1,10 +1,9 @@
-const fs = require("fs");
 const path = require("path");
 
 const express = require("express");
-const uuid = require("uuid");
 
-const resData = require("./util/restaurant-data");
+const defaultRoutes = require("./routes/default");
+const restaurantsRoutes = require("./routes/restaurants");
 
 const app = express();
 
@@ -14,55 +13,9 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", function (req, res) {
-  res.render("index");
-});
+app.use("/", defaultRoutes);
 
-app.get("/restaurants", function (req, res) {
-  const restaurants = resData.getStoredRestaurants();
-
-  res.render("restaurants", {
-    numberOfRestaurants: restaurants.length,
-    restaurants: restaurants,
-  });
-});
-
-app.get("/restaurant/:id", function (req, res) {
-  const restaurantId = req.params.id;
-  const storedRestaurants = resData.getStoredRestaurants();
-
-  for (const restaurant of storedRestaurants) {
-    if (restaurant.id == restaurantId) {
-      return res.render("restaurants-detail", { restaurant: restaurant });
-    }
-  }
-
-  res.status(404).render("404");
-});
-
-app.get("/recommend", function (req, res) {
-  res.render("recommend");
-});
-
-app.post("/recommend", function (req, res) {
-  const restaurant = req.body;
-  restaurant.id = uuid.v4();
-  const storedRestaurants = resData.getStoredRestaurants();
-
-  storedRestaurants.push(restaurant);
-
-  resData.storeRestaurants(storedRestaurants);
-
-  res.redirect("/confirm");
-});
-
-app.get("/confirm", function (req, res) {
-  res.render("confirm");
-});
-
-app.get("/about", function (req, res) {
-  res.render("about");
-});
+app.use("/", restaurantsRoutes);
 
 app.use(function (req, res) {
   res.status(404).render("404");
